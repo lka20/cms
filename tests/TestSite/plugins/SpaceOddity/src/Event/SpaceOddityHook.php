@@ -4,22 +4,22 @@
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @since	 2.0.0
- * @author	 Christopher Castro <chris@quickapps.es>
- * @link	 http://www.quickappscms.org
- * @license	 http://opensource.org/licenses/gpl-3.0.html GPL-3.0 License
+ * @since    2.0.0
+ * @author   Christopher Castro <chris@quickapps.es>
+ * @link     http://www.quickappscms.org
+ * @license  http://opensource.org/licenses/gpl-3.0.html GPL-3.0 License
  */
 namespace SpaceOddity\Event;
 
 use Cake\Event\Event;
-use Cake\Event\EventListener;
+use Cake\Event\EventListenerInterface;
 use Cake\Error\Debugger;
 
 /**
  * SpaceOddity Hook class.
  *
  */
-class SpaceOddityHook implements EventListener {
+class SpaceOddityHook implements EventListenerInterface {
 
 	protected $_lyrics = 'Ground Control to Major Tom
 Ground Control to Major Tom
@@ -84,7 +84,7 @@ And there\'s nothing I can do.';
  * @return void
  */
 	public function afterRender(Event $event) {
-		$event->subject->Blocks->set('title', $this->_line());
+		$event->subject()->Blocks->set('title', $this->_line());
 	}
 
 /**

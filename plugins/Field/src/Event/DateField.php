@@ -1,0 +1,202 @@
+<?php
+/**
+ * Licensed under The GPL-3.0 License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @since    2.0.0
+ * @author   Christopher Castro <chris@quickapps.es>
+ * @link     http://www.quickappscms.org
+ * @license  http://opensource.org/licenses/gpl-3.0.html GPL-3.0 License
+ */
+namespace Field\Event;
+
+use Cake\Event\Event;
+use Cake\ORM\Entity;
+use Field\Event\Base\FieldHandler;
+use Field\Model\Entity\Field;
+
+/**
+ * Date Field Handler.
+ *
+ * This field allows attach date pickers to entities.
+ */
+class DateField extends FieldHandler
+{
+
+    /**
+     * {@inheritDoc}
+     */
+    public function entityDisplay(Event $event, Field $field, $options = [])
+    {
+        $View = $event->subject();
+        return $View->element('Field.DateField/display', compact('field', 'options'));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function entityEdit(Event $event, Field $field, $options = [])
+    {
+        $View = $event->subject();
+        return $View->element('Field.DateField/edit', compact('field', 'options'));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function entityFieldAttached(Event $event, Field $field)
+    {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function entityBeforeFind(Event $event, Field $field, $options, $primary)
+    {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function entityBeforeSave(Event $event, Field $field, $options)
+    {
+        $date = $options['_post'];
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function entityAfterSave(Event $event, Field $field, $options)
+    {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function entityBeforeValidate(Event $event, Field $field, $options, $validator)
+    {
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function entityAfterValidate(Event $event, Field $field, $options, $validator)
+    {
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function entityBeforeDelete(Event $event, Field $field, $options)
+    {
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function entityAfterDelete(Event $event, Field $field, $options)
+    {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function instanceInfo(Event $event)
+    {
+        return [
+            'name' => __d('field', 'Date'),
+            'description' => __d('field', 'Allows to attach date picker to contents.'),
+            'hidden' => false
+        ];
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function instanceSettingsForm(Event $event, $instance, $options = [])
+    {
+        $View = $event->subject();
+        return $View->element('Field.DateField/settings_form', compact('instance', 'options'));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function instanceSettingsDefaults(Event $event, $instance, $options = [])
+    {
+        return [];
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function instanceSettingsValidate(Event $event, Entity $settings, $validator)
+    {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function instanceViewModeForm(Event $event, $instance, $options = [])
+    {
+        $View = $event->subject();
+        return $View->element('Field.DateField/view_mode_form', compact('instance', 'options'));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function instanceViewModeDefaults(Event $event, $instance, $options = [])
+    {
+        switch ($options['viewMode']) {
+            default:
+                return [
+                    'label_visibility' => 'above',
+                    'hooktags' => true,
+                    'hidden' => false,
+                ];
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function instanceViewModeValidate(Event $event, Entity $viewMode, $validator)
+    {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function instanceBeforeAttach(Event $event, $instance, $options = [])
+    {
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function instanceAfterAttach(Event $event, $instance, $options = [])
+    {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function instanceBeforeDetach(Event $event, $instance, $options = [])
+    {
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function instanceAfterDetach(Event $event, $instance, $options = [])
+    {
+    }
+}

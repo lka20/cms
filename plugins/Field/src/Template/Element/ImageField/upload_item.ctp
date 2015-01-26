@@ -4,10 +4,10 @@
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @since	 2.0.0
- * @author	 Christopher Castro <chris@quickapps.es>
- * @link	 http://www.quickappscms.org
- * @license	 http://opensource.org/licenses/gpl-3.0.html GPL-3.0 License
+ * @since    2.0.0
+ * @author   Christopher Castro <chris@quickapps.es>
+ * @link     http://www.quickappscms.org
+ * @license  http://opensource.org/licenses/gpl-3.0.html GPL-3.0 License
  */
 
 /**
@@ -31,8 +31,8 @@
  */
 ?>
 
-<?php if (!static::cache('ImageFieldTemplates')): ?>
-	<?php static::cache('ImageFieldTemplates', '__LOADED__'); ?>
+<?php if (!isset($this->viewVars['__ImageFieldTemplates__'])): ?>
+	<?php $this->viewVars['__ImageFieldTemplates__'] = '__LOADED__'; ?>
 	<script id="image-item-template" type="x-tmpl-mustache">
 		<div id="{{uid}}" class="alert alert-info {{#perm}}is-perm{{/perm}} file-item" data-number="{{number}}">
 			<div class="media">

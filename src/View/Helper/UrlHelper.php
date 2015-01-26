@@ -14,10 +14,6 @@
  */
 namespace QuickApps\View\Helper;
 
-use Cake\Core\Configure;
-use Cake\Core\Plugin;
-use Cake\Routing\Router;
-use Cake\Utility\Inflector;
 use Cake\View\Helper;
 use Cake\View\Helper\UrlHelper as CakeUrlHelper;
 use QuickApps\Event\HookAwareTrait;
@@ -25,40 +21,44 @@ use QuickApps\Event\HookAwareTrait;
 /**
  * UrlHelper class for generating urls.
  */
-class UrlHelper extends CakeUrlHelper {
+class UrlHelper extends CakeUrlHelper
+{
 
-	use HookAwareTrait;
+    use HookAwareTrait;
 
-/**
- * {@inheritDoc}
- */
-	public function build($url = null, $full = false) {
-		$this->alter('UrlHelper.build', $url, $full);
-		return parent::build($url, $full);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public function build($url = null, $full = false)
+    {
+        $this->alter(['UrlHelper.build', $this->_View], $url, $full);
+        return parent::build($url, $full);
+    }
 
-/**
- * {@inheritDoc}
- */
-	public function assetUrl($path, array $options = array()) {
-		$this->alter('UrlHelper.assetUrl', $path, $options);
-		return parent::assetUrl($path, $options);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public function assetUrl($path, array $options = array())
+    {
+        $this->alter(['UrlHelper.assetUrl', $this->_View], $path, $options);
+        return parent::assetUrl($path, $options);
+    }
 
-/**
- * {@inheritDoc}
- */
-	public function assetTimestamp($path) {
-		$this->alter('UrlHelper.assetTimestamp', $path);
-		return parent::assetTimestamp($path);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public function assetTimestamp($path)
+    {
+        $this->alter(['UrlHelper.assetTimestamp', $this->_View], $path);
+        return parent::assetTimestamp($path);
+    }
 
-/**
- * {@inheritDoc}
- */
-	public function webroot($file) {
-		$this->alter('UrlHelper.webroot', $file);
-		return parent::webroot($file);
-	}
-
+    /**
+     * {@inheritDoc}
+     */
+    public function webroot($file)
+    {
+        $this->alter(['UrlHelper.webroot', $this->_View], $file);
+        return parent::webroot($file);
+    }
 }

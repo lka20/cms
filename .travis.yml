@@ -6,10 +6,11 @@ php:
   - 5.6
 
 env:
-  - DB=mysql db_class='Cake\Database\Driver\Mysql' db_dsn='mysql:host=0.0.0.0;dbname=quick_test' db_database='quick_test' db_login='travis' db_password=''
+  - DB=mysql db_dsn='mysql://travis@0.0.0.0/quick_test'
 
 services:
   - memcached
+  - redis-server
 
 matrix:
   allow_failures:
@@ -19,24 +20,20 @@ matrix:
     - php: 5.4
       env: PHPCS=1
     - php: hhvm-nightly
-      env: HHVM=1 DB=mysql db_class='Cake\Database\Driver\Mysql' db_dsn='mysql:host=0.0.0.0;dbname=quick_test' db_database='quick_test' db_login='travis' db_password=''
+      env: HHVM=1 DB=mysql db_dsn='mysql://travis@0.0.0.0/quick_test'
 
 before_script:
   - composer self-update
   - composer install --prefer-dist --no-interaction --dev
-  - sh -c "if [ '$PHPCS' != '1' ]; then sudo locale-gen de_DE; fi"
   - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'CREATE DATABASE quick_test;'; fi"
-  - sh -c "if [ '$PHPCS' != '1' ]; then sudo apt-get install lighttpd; fi"
   - sh -c "if [ '$HHVM' != '1' ]; then echo 'extension = memcached.so' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi"
-  - sh -c "pear channel-discover pear.cakephp.org"
-  - sh -c "pear install PHP_CodeSniffer"
-  - sh -c "pear install --alldeps cakephp/CakePHP_CodeSniffer"
   - phpenv rehash
   - set +H
 
 script:
   - sh -c "if [ '$PHPCS' != '1' ]; then phpunit; fi"
-  - sh -c "phpcs --ignore=*/Lib/* -p --extensions=php --standard=CakePHP ./src ./plugins"
+  - sh -c "if [ '$PHPCS' = '1' ]; then vendor/bin/phpcs --version; fi"
+  - sh -c "if [ '$PHPCS' = '1' ]; then vendor/bin/phpcs -p -n --ignore=*/Lib/* --extensions=php --standard=vendor/cakephp/cakephp-codesniffer/CakePHP ./src ./plugins; fi"
 
 notifications:
   email: false

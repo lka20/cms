@@ -4,10 +4,10 @@
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @since	 2.0.0
- * @author	 Christopher Castro <chris@quickapps.es>
- * @link	 http://www.quickappscms.org
- * @license	 http://opensource.org/licenses/gpl-3.0.html GPL-3.0 License
+ * @since    2.0.0
+ * @author   Christopher Castro <chris@quickapps.es>
+ * @link     http://www.quickappscms.org
+ * @license  http://opensource.org/licenses/gpl-3.0.html GPL-3.0 License
  */
 ?>
 
@@ -101,7 +101,7 @@
 			)
 		);
 	?>
-	<p class="help-block"><?php echo __d('field', 'Enter your custom regular expression. e.g.: "/^[a-z0-9]{3,}$/i" (Only letters and integers, min 3 characters)'); ?></p>
+	<p class="help-block"><?php echo __d('field', 'Enter your custom regular expression. e.g.: <strong>/^[a-z0-9]{3,}$/i</strong> (Only letters and integers, min 3 characters)'); ?></p>
 </div>
 
 <div class="form-group validation-message">

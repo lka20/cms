@@ -4,10 +4,10 @@
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @since	 2.0.0
- * @author	 Christopher Castro <chris@quickapps.es>
- * @link	 http://www.quickappscms.org
- * @license	 http://opensource.org/licenses/gpl-3.0.html GPL-3.0 License
+ * @since    2.0.0
+ * @author   Christopher Castro <chris@quickapps.es>
+ * @link     http://www.quickappscms.org
+ * @license  http://opensource.org/licenses/gpl-3.0.html GPL-3.0 License
  */
 use Cake\Core\Configure;
 use Cake\I18n\I18n;
@@ -17,7 +17,7 @@ use Cake\I18n\I18n;
  * is commonly used as fallback language and should NEVER be changed!
  */
 if (!defined('CORE_LOCALE')) {
-	define('CORE_LOCALE', 'en-us');
+    define('CORE_LOCALE', 'en-us');
 }
 
 /**
@@ -58,10 +58,11 @@ if (!defined('CORE_LOCALE')) {
  * @param string|null $key The key to read, or null to read the whole info
  * @return mixed
  */
-	function language($key = null) {
-		$code = I18n::defaultLocale();
-		if ($key !== null) {
-			return Configure::read("QuickApps.languages.{$code}.{$key}");
-		}
-		return Configure::read('QuickApps.languages.{$code}');
-	}
+function language($key = null)
+{
+    $code = I18n::defaultLocale();
+    if ($key !== null) {
+        return Configure::read("QuickApps.languages.{$code}.{$key}");
+    }
+    return Configure::read('QuickApps.languages.{$code}');
+}

@@ -4,10 +4,10 @@
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @since	 2.0.0
- * @author	 Christopher Castro <chris@quickapps.es>
- * @link	 http://www.quickappscms.org
- * @license	 http://opensource.org/licenses/gpl-3.0.html GPL-3.0 License
+ * @since    2.0.0
+ * @author   Christopher Castro <chris@quickapps.es>
+ * @link     http://www.quickappscms.org
+ * @license  http://opensource.org/licenses/gpl-3.0.html GPL-3.0 License
  */
 namespace Field\Model\Entity;
 
@@ -18,22 +18,24 @@ use QuickApps\Event\HookAwareTrait;
  * Represents an "instance" from the "field_instances" database table.
  *
  */
-class FieldInstance extends Entity {
+class FieldInstance extends Entity
+{
 
-	use HookAwareTrait;
+    use HookAwareTrait;
 
-/**
- * Gets a human-readable name of the field handler class.
- *
- * @return string
- */
-	protected function _getHandlerName() {
-		$info = $this->trigger("Field.{$this->handler}.Instance.info");
+    /**
+     * Gets a human-readable name of the field handler class.
+     *
+     * @return string
+     */
+    protected function _getHandlerName()
+    {
+        $info = $this->trigger("Field.{$this->handler}.Instance.info");
 
-		if (!empty($info->result['name'])) {
-			return $info->result['name'];
-		}
+        if (!empty($info->result['name'])) {
+            return $info->result['name'];
+        }
 
-		return $this->handler;
-	}
+        return $this->handler;
+    }
 }
